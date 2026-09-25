@@ -3,287 +3,262 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>A Little Surprise ❤️</title>
-
+<title>For You ❤️</title>
 <style>
 * {
     box-sizing: border-box;
 }
-
 body {
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+        radial-gradient(circle at top, #ffdce8 0%, #f8b7ca 35%, #c86b91 100%);
+    color: #fff;
+}
+.screen {
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: Georgia, serif;
-    background:
-        radial-gradient(circle at center,
-        #3b102c 0%,
-        #190914 55%,
-        #080409 100%);
-    color: white;
-}
-
-/* Soft glow behind the gift */
-
-.glow {
-    position: absolute;
-    width: 260px;
-    height: 260px;
-    background: rgba(255, 70, 140, 0.18);
-    border-radius: 50%;
-    filter: blur(70px);
-}
-
-/* Main area */
-
-.container {
-    position: relative;
     text-align: center;
-    z-index: 5;
+    padding: 25px;
 }
-
-.title {
-    font-size: 23px;
+h1 {
+    font-size: 25px;
     font-weight: normal;
-    letter-spacing: 1px;
-    margin-bottom: 55px;
+    margin: 0 0 30px;
+    text-shadow: 0 2px 10px rgba(80,0,30,.25);
 }
-
-/* Gift */
-
+.subtitle {
+    margin-top: 24px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    opacity: .9;
+}
+/* GIFT */
 .gift {
     position: relative;
-    width: 105px;
+    width: 110px;
     height: 90px;
-    margin: auto;
     cursor: pointer;
-    transition: transform 0.3s;
+    filter: drop-shadow(0 12px 15px rgba(70,0,30,.25));
+    transition: transform .3s ease;
 }
-
 .gift:hover {
     transform: scale(1.05);
 }
-
-/* Box */
-
 .box {
     position: absolute;
     bottom: 0;
-    left: 5px;
-    width: 95px;
-    height: 62px;
-    border-radius: 3px;
-    background: linear-gradient(
-        145deg,
-        #d91b55,
-        #9c123e
-    );
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,0.45),
-        0 0 25px rgba(255,40,120,0.25);
+    width: 110px;
+    height: 70px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #b91d55, #e94f7c);
 }
-
-/* Vertical ribbon */
-
-.box::after {
-    content: "";
-    position: absolute;
-    left: 41px;
-    top: 0;
-    width: 13px;
-    height: 62px;
-    background: #e8b85c;
-}
-
-/* Lid */
-
 .lid {
     position: absolute;
+    top: 15px;
+    left: -5px;
+    width: 120px;
+    height: 22px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #d62d62, #f46d91);
+    transition: transform .8s ease;
     z-index: 3;
-    top: 17px;
-    left: 0;
-    width: 105px;
-    height: 20px;
-    border-radius: 4px;
-    background: linear-gradient(
-        145deg,
-        #ed2864,
-        #ad1545
-    );
-
-    transition:
-        transform 0.9s ease,
-        top 0.9s ease;
 }
-
-/* Ribbon on lid */
-
-.lid::after {
+.ribbon-v {
+    position: absolute;
+    left: 45px;
+    bottom: 0;
+    width: 20px;
+    height: 70px;
+    background: #f7d477;
+    z-index: 2;
+}
+.ribbon-h {
+    position: absolute;
+    top: 15px;
+    left: -5px;
+    width: 120px;
+    height: 10px;
+    background: #f7d477;
+    z-index: 4;
+}
+.bow {
+    position: absolute;
+    top: -5px;
+    left: 35px;
+    width: 40px;
+    height: 25px;
+    z-index: 5;
+}
+.bow:before,
+.bow:after {
     content: "";
     position: absolute;
-    left: 41px;
-    top: 0;
-    width: 13px;
-    height: 20px;
-    background: #e8b85c;
-}
-
-/* Bow */
-
-.bow-left,
-.bow-right {
-    position: absolute;
-    top: -13px;
-    width: 28px;
+    width: 25px;
     height: 18px;
-    background: #e8b85c;
-    border-radius: 50% 50% 40% 40%;
+    background: #f7d477;
+    border-radius: 50% 50% 50% 10%;
 }
-
-.bow-left {
-    left: 28px;
-    transform: rotate(25deg);
-}
-
-.bow-right {
-    left: 48px;
+.bow:before {
+    left: 0;
     transform: rotate(-25deg);
 }
-
-.bow-center {
-    position: absolute;
-    z-index: 5;
-    top: -8px;
-    left: 43px;
-    width: 16px;
-    height: 16px;
-    background: #d9a848;
-    border-radius: 50%;
+.bow:after {
+    right: 0;
+    transform: rotate(25deg) scaleX(-1);
 }
-
-/* Opening animation */
-
-.gift.open .lid {
-    top: -35px;
-    transform: rotate(-7deg);
+/* PHOTO */
+.photo-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    animation: appear 1.2s ease forwards;
 }
-
-/* Tap text */
-
-.tap {
-    margin-top: 38px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    opacity: 0.65;
+.photo {
+    width: min(78vw, 300px);
+    max-height: 55vh;
+    object-fit: cover;
+    border-radius: 18px;
+    padding: 7px;
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 15px 45px rgba(60,0,30,.35);
 }
-
-/* Floating hearts */
-
+.message {
+    max-width: 330px;
+    margin-top: 22px;
+    font-size: 18px;
+    line-height: 1.7;
+    text-shadow: 0 2px 8px rgba(60,0,30,.3);
+}
+.signature {
+    margin-top: 12px;
+    font-size: 15px;
+    font-style: italic;
+}
+/* HEARTS */
 .heart {
-    position: absolute;
+    position: fixed;
     bottom: -30px;
+    font-size: 20px;
     pointer-events: none;
     animation: floatUp linear forwards;
-    opacity: 0;
 }
-
 @keyframes floatUp {
-
-    0% {
-        transform: translateY(0) scale(0.5);
+    from {
+        transform: translateY(0) rotate(0deg);
         opacity: 0;
     }
-
-    20% {
-        opacity: 0.7;
+    15% {
+        opacity: 1;
     }
-
-    100% {
-        transform:
-            translateY(-110vh)
-            translateX(30px)
-            scale(1.2);
+    to {
+        transform: translateY(-110vh) rotate(25deg);
         opacity: 0;
     }
 }
-
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(.85) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+/* CONFETTI */
+.confetti {
+    position: fixed;
+    width: 8px;
+    height: 12px;
+    top: -20px;
+    pointer-events: none;
+    animation: fall 3s linear forwards;
+}
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+    }
+}
+.hidden {
+    display: none;
+}
 </style>
 </head>
-
 <body>
-
-<div class="glow"></div>
-
-<div class="container">
-
-    <div class="title">
-        I have something for you... ❤️
-    </div>
-
-    <div class="gift" onclick="openGift()">
-
-        <div class="lid">
-
-            <div class="bow-left"></div>
-            <div class="bow-right"></div>
-            <div class="bow-center"></div>
-
-        </div>
-
+<div class="screen" id="startScreen">
+    <h1>I have something special for you... ❤️</h1>
+    <div class="gift" id="gift">
+        <div class="bow"></div>
+        <div class="lid"></div>
         <div class="box"></div>
-
+        <div class="ribbon-v"></div>
+        <div class="ribbon-h"></div>
     </div>
-
-    <div class="tap">
-        Tap to open
-    </div>
-
+    <div class="subtitle">TAP TO OPEN</div>
 </div>
-
-
+<div class="screen photo-container" id="surprise">
+    <img src="IMG_0984.jpeg" class="photo" alt="Our memory">
+    <div class="message">
+        You are one of the most beautiful parts of my life. ❤️
+        <br>
+        No matter where life takes us,
+        I hope we always have moments like this to remember.
+    </div>
+    <div class="signature">
+        With all my love ❤️
+    </div>
+</div>
 <script>
-
-function openGift() {
-
-    document
-        .querySelector(".gift")
-        .classList.add("open");
-
-}
-
-function createHeart() {
-
-    const heart = document.createElement("div");
-
-    heart.className = "heart";
-
-    heart.innerHTML =
-        Math.random() > 0.5 ? "♡" : "♥";
-
-    heart.style.left =
-        Math.random() * 100 + "vw";
-
-    heart.style.fontSize =
-        (12 + Math.random() * 15) + "px";
-
-    heart.style.animationDuration =
-        (5 + Math.random() * 4) + "s";
-
-    document.body.appendChild(heart);
-
+const gift = document.getElementById("gift");
+const startScreen = document.getElementById("startScreen");
+const surprise = document.getElementById("surprise");
+const lid = document.querySelector(".lid");
+gift.addEventListener("click", () => {
+    /* Open lid */
+    lid.style.transform = "translateY(-45px) rotate(-8deg)";
+    /* Confetti */
+    for (let i = 0; i < 70; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti";
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.animationDelay = Math.random() * .8 + "s";
+        piece.style.background =
+            ["#ff4f81", "#ffd166", "#ffffff", "#ff8fab", "#cdb4db"]
+            [Math.floor(Math.random() * 5)];
+        piece.style.transform =
+            `rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 4000);
+    }
+    /* Switch screen */
     setTimeout(() => {
-        heart.remove();
-    }, 9000);
+        startScreen.style.display = "none";
+        surprise.style.display = "flex";
+        startHearts();
+    }, 900);
+});
+function startHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML =
+            ["❤️", "💕", "💗", "💖", "💘"]
+            [Math.floor(Math.random() * 5)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize =
+            (14 + Math.random() * 18) + "px";
+        heart.style.animationDuration =
+            (4 + Math.random() * 4) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 8000);
+    }, 450);
 }
-
-setInterval(createHeart, 900);
-
 </script>
-
 </body>
 </html>
